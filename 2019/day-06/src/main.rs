@@ -63,7 +63,7 @@ impl Universe {
     }
   }
 
-  pub fn process_orbits(&mut self, orbits: &Vec<&str>) {
+  pub fn process_orbits(&mut self, orbits: &Vec<String>) {
     orbits.iter().for_each(|el| {
       let parts: Vec<&str> = el.trim().split(")").collect();
       let inner_name = parts[0];
@@ -116,12 +116,19 @@ impl Universe {
   }
 }
 
-fn main() {
-  let contents = fs::read_to_string("input.txt")
-    .expect("Something went wrong reading the file");
-  let space_objects: Vec<&str> = contents
+fn get_space_objects(filename: &str) -> Vec<String> {
+  let contents = fs::read_to_string(filename)
+      .expect("Something went wrong reading the file");
+  let space_objects: Vec<String> = contents
     .lines()
+    .map(ToOwned::to_owned)
     .collect();
+
+  space_objects
+}
+
+fn main() {
+  let space_objects = get_space_objects("input.txt");
 
   let mut universe = Universe::new();
   universe.process_orbits(&space_objects);
@@ -136,11 +143,7 @@ mod test {
 
   #[test]
   fn test_orbits() {
-    let contents = fs::read_to_string("test.txt")
-    .expect("Something went wrong reading the file");
-    let space_objects: Vec<&str> = contents
-      .lines()
-      .collect();
+    let space_objects = get_space_objects("test.txt");
 
     let mut universe = Universe::new();
     universe.process_orbits(&space_objects);
@@ -150,11 +153,7 @@ mod test {
 
   #[test]
   fn test_paths() {
-    let contents = fs::read_to_string("test2.txt")
-      .expect("Something went wrong reading the file");
-    let space_objects: Vec<&str> = contents
-      .lines()
-      .collect();
+    let space_objects = get_space_objects("test2.txt");
 
     let mut universe = Universe::new();
     universe.process_orbits(&space_objects);
