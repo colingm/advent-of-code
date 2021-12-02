@@ -10,48 +10,48 @@ enum Direction {
 
 struct Instruction {
     direction: Direction,
-    distance: usize
+    value: usize
 }
 
 impl Instruction {
     pub fn new(line: &str) -> Self {
         let direction: Direction;
-        let distance: usize;
+        let value: usize;
         match line.split(' ').collect_tuple() {
             Some(("forward", dis)) => {
                 direction = Direction::FORWARD;
-                distance = dis.parse().unwrap();
+                value = dis.parse().unwrap();
             },
             Some(("up", dis)) => {
                 direction = Direction::UP;
-                distance = dis.parse().unwrap();
+                value = dis.parse().unwrap();
             },
             Some(("down", dis)) => {
                 direction = Direction::DOWN;
-                distance = dis.parse().unwrap();
+                value = dis.parse().unwrap();
             },
             _ => panic!("Unknown op code")
         }
 
         Self {
             direction,
-            distance
+            value
         }
     }
 
     pub fn execute(&self, (x, y): (usize, usize)) -> (usize, usize) {
         match self.direction {
-            Direction::FORWARD => (x + self.distance, y),
-            Direction::UP => (x, y - self.distance),
-            Direction::DOWN => (x, y + self.distance)
+            Direction::FORWARD => (x + self.value, y),
+            Direction::UP => (x, y - self.value),
+            Direction::DOWN => (x, y + self.value)
         }
     }
 
     pub fn execute_with_aim(&self, (x, y, aim): (usize, usize, usize)) -> (usize, usize, usize) {
         match self.direction {
-            Direction::FORWARD => (x + self.distance, y + aim * self.distance, aim),
-            Direction::UP => (x, y, aim - self.distance),
-            Direction::DOWN => (x, y, aim + self.distance)
+            Direction::FORWARD => (x + self.value, y + aim * self.value, aim),
+            Direction::UP => (x, y, aim - self.value),
+            Direction::DOWN => (x, y, aim + self.value)
         }
     }
 }
