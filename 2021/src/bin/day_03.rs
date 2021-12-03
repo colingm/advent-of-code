@@ -10,35 +10,27 @@ fn part_1(lines: &Vec<Vec<u8>>) -> usize {
     let bit_count = lines[0].len();
     let mut bits: Vec<usize> = vec![0; bit_count];
 
-    lines.iter()
-        .for_each(|val| {
-            val.iter()
-                .enumerate()
-                .for_each(|(i, bit)| {
-                    if *bit == 1 {
-                        bits[i] += 1;
-                    }
-                });
-        });
+    for line in lines {
+        for (i, bit) in line.iter().enumerate() {
+            if *bit == 1 {
+                bits[i] += 1;
+            }
+        }
+    }
 
-    let half: usize = (lines.len() + 1) / 2;
-
+    let half: usize = lines.len() / 2;
     let mut gamma: usize = 0;
     let mut epsilon: usize = 0;
 
-    bits.iter()
-        .for_each(|val| {
-            gamma <<= 1;
-            epsilon <<= 1;
-
-            let mut bit = 0;
-            if *val > half {
-                bit = 1;
-            }
-
-            gamma += bit;
-            epsilon += ((bit % 2) == 0) as usize;
-        });
+    for bit in bits {
+        gamma <<= 1;
+        epsilon <<= 1;
+        if bit > half {
+            gamma += 1;
+        } else {
+            epsilon += 1;
+        }
+    }
 
     println!("gamma: {}, epsilon: {}", gamma, epsilon);
 
@@ -55,15 +47,15 @@ fn find_rating(numbers: &Vec<Vec<u8>>, most_common: bool) -> usize {
         let mut zeros: Vec<Vec<u8>> = Vec::new();
         let half: usize = (current.len() + 1) / 2;
         let mut one_count = 0;
-        current.iter()
-            .for_each(|val| {
-                if val[current_bit] == 1 {
-                    one_count += 1;
-                    ones.push(val.to_vec())
-                } else {
-                    zeros.push(val.to_vec());
-                }
-            });
+
+        for val in current {
+            if val[current_bit] == 1 {
+                one_count += 1;
+                ones.push(val.to_vec())
+            } else {
+                zeros.push(val.to_vec());
+            }
+        }
 
         if (most_common && one_count >= half) || (!most_common && one_count < half) {
             current = ones.to_vec();
