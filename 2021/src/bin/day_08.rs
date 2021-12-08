@@ -62,7 +62,7 @@ fn part_2(lines: &Vec<String>) -> usize {
                 5 => {
                     if digit.intersection(&known_digits[&4]).count() == 2 {
                         known_digits.insert(2, digit.clone());
-                    } else if digit.intersection(&known_digits[&4]).count() == 3 && digit.intersection(&known_digits[&1]).count() == 2 {
+                    } else if digit.intersection(&known_digits[&1]).count() == 2 {
                         known_digits.insert(3, digit.clone());
                     } else {
                         known_digits.insert(5, digit.clone());
@@ -71,10 +71,10 @@ fn part_2(lines: &Vec<String>) -> usize {
                 6 => {
                     if digit.intersection(&known_digits[&1]).count() == 1 {
                         known_digits.insert(6, digit.clone());
-                    } else if digit.intersection(&known_digits[&4]).count() == 3 {
-                        known_digits.insert(0, digit.clone());
-                    } else {
+                    } else if digit.intersection(&known_digits[&4]).count() == 4 {
                         known_digits.insert(9, digit.clone());
+                    } else {
+                        known_digits.insert(0, digit.clone());
                     }
                 },
                 _ => {}
