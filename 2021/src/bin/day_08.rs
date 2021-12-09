@@ -1,24 +1,6 @@
 use aoc2021::{get_input, parse_string};
 use std::collections::{HashMap, HashSet};
 
-// 0 - 6 segments
-// 1 - 2 segments
-// 2 - 5 segments
-// 3 - 5 segments
-// 4 - 4 segments
-// 5 - 5 segments
-// 6 - 6 segments
-// 7 - 3 segments
-// 8 - 7 segments
-// 9 - 6 segments
-
-// 2 segments = 1
-// 3 segments = 7
-// 4 segments = 4
-// 5 segments = 2, 3, 5
-// 6 segments = 0, 6, 9
-// 7 segments = 8
-
 fn part_1(lines: &Vec<String>) -> usize {
     let mut simple_digit_count: usize = 0;
     for line in lines.iter() {

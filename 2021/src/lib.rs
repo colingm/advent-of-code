@@ -8,6 +8,10 @@ pub fn parse_string(line: &str) -> String {
     line.to_string()
 }
 
+pub fn parse_u8_vec(line: &str) -> Vec<u8> {
+    line.chars().map(|c| c.to_digit(10).unwrap() as u8).collect()
+}
+
 pub fn parse_str(line: &str) -> &str {
     line
 }
