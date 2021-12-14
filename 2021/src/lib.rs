@@ -12,10 +12,6 @@ pub fn parse_u8_vec(line: &str) -> Vec<u8> {
     line.chars().map(|c| c.to_digit(10).unwrap() as u8).collect()
 }
 
-pub fn parse_str(line: &str) -> &str {
-    line
-}
-
 pub fn get_input<T>(filename: &str, map_fn: &dyn Fn(&str) -> T) -> Vec<T> {
     let contents = fs::read_to_string(filename)
         .expect("Something went wrong reading the file");
