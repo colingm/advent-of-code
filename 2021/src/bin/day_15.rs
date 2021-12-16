@@ -81,7 +81,6 @@ fn shortest_path(adj_list: &Vec<Vec<Edge>>, start: usize, goal: usize) -> Option
 fn convert_to_adj_list(rows: &Vec<Vec<u8>>, tiles: usize) -> Vec<Vec<Edge>> {
     let y_max = rows.len() * tiles;
     let x_max = rows[0].len() * tiles;
-    let vertices = x_max * y_max;
 
     let mut adj_list: Vec<Vec<Edge>> = Vec::new();
     for y in 0..y_max {
