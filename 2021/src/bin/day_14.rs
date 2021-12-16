@@ -78,17 +78,6 @@ impl Polymer {
                 max = value;
             }
         }
-        // let mut min: usize = *self.pairs.values().nth(0).unwrap();
-        // let mut max: usize = 0;
-
-        // for &element in self.pairs.values() {
-        //     if element < min {
-        //         min = element;
-        //     }
-        //     if element > max {
-        //         max = element;
-        //     }
-        // }
 
         (min, max)
     }
