@@ -161,18 +161,4 @@ mod test {
 
         assert_eq!(part_1(&input), 655);
     }
-
-    // #[test]
-    // fn test_part_2() {
-    //     let input = get_input("inputs/test/day_13.txt", &parse_string);
-
-    //     assert_eq!(part_2(&input), 195);
-    // }
-
-    // #[test]
-    // fn test_part_2_answer() {
-    //     let input = get_input("inputs/day_13.txt", &parse_string);
-
-    //     assert_eq!(part_2(&input), 210);
-    // }
 }
