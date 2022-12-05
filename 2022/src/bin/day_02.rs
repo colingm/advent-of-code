@@ -1,8 +1,9 @@
 use aoc2022::read_string;
+use pom::char_class::*;
 use pom::parser::*;
 
 fn parse(input: &String) -> Vec<(u8, u8)> {
-    let round = (one_of(b"ABC") - sym(b' ') + one_of(b"XYZ") - sym(b'\n'))
+    let round = (is_a(alpha) - sym(b' ') + is_a(alpha) - sym(b'\n'))
         .map(|p| (p.0 - 64, p.1 - 23 - 64));
     let rounds = round.repeat(1..);
 

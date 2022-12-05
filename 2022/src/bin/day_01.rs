@@ -1,20 +1,12 @@
-use aoc2022::read_string;
+use aoc2022::{read_string, integer};
 use itertools::Itertools;
-use pom::char_class::*;
 use pom::parser::*;
-use std::str;
 
 fn parse(input: &String) -> Vec<usize> {
-    let find_integers = is_a(digit)
-        .repeat(1..)
-        .collect()
-        .convert(str::from_utf8)
-        .convert(|s| s.parse::<usize>());
-    let find_calories = find_integers - sym(b'\n');
-    let find_pack = find_calories.repeat(1..);
-    let find_elves = list(find_pack, sym(b'\n'));
+    let pack = list(integer(), sym(b'\n'));
+    let elves = list(pack, sym(b'\n'));
 
-    let inventory = find_elves.parse(input.as_bytes())
+    let inventory = elves.parse(input.as_bytes())
         .unwrap();
 
     inventory.iter()
