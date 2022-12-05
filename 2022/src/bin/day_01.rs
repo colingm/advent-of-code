@@ -1,10 +1,11 @@
 use aoc2022::read_string;
 use itertools::Itertools;
-use pom::parser::{list, one_of, sym};
+use pom::char_class::*;
+use pom::parser::*;
 use std::str;
 
 fn parse(input: &String) -> Vec<usize> {
-    let find_integers = one_of(b"0123456789")
+    let find_integers = is_a(digit)
         .repeat(1..)
         .collect()
         .convert(str::from_utf8)
