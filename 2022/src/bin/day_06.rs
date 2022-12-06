@@ -7,10 +7,8 @@ fn search(input: &String, length: usize) -> usize {
     let count: usize = input.len();
     let mut i: usize = 0;
     while i < (count - length) {
-        let subset = characters[i..i+length].to_vec();
-        let set: HashSet<char> = HashSet::from_iter(subset);
-
-        if set.len() == length {
+        let subset: HashSet<char> = HashSet::from_iter(characters[i..i+length].to_vec());
+        if subset.len() == length {
             return i + length;
         }
         i += 1;
