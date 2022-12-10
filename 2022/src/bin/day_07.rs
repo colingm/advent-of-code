@@ -10,14 +10,9 @@ enum Command {
 }
 
 #[derive(Debug)]
-struct File {
-    size: usize
-}
-
-#[derive(Debug)]
 enum Node {
     Directory,
-    File(File)
+    File(usize)
 }
 
 fn build_sizes(commands: &Vec<Command>) -> Vec<usize> {
@@ -38,7 +33,7 @@ fn build_sizes(commands: &Vec<Command>) -> Vec<usize> {
                             match n {
                                 Node::Directory => {},
                                 Node::File(f) => {
-                                    current_subdirectories.iter_mut().for_each(|x| *x += f.size )
+                                    current_subdirectories.iter_mut().for_each(|x| *x += f )
                                 }
                             }
                         });
@@ -54,7 +49,7 @@ fn parse(input: &String) -> Vec<Command> {
     let directory: Parser<u8, Node> = (seq(b"dir") * sym(b' ') * is_a(alpha).repeat(1..).discard())
         .map(|_x| Node::Directory);
     let file: Parser<u8, Node> = (integer() - sym(b' ') - (is_a(alpha) | sym(b'.')).repeat(1..))
-        .map(|x| Node::File(File { size: x }));
+        .map(|x| Node::File(x));
     let change_command: Parser<u8, Command> = (seq(b"$ cd ") * string())
         .map(|x| Command::CD(x));
     let list_command: Parser<u8, Command> = (seq(b"$ ls\n") * list(directory | file, sym(b'\n')))
