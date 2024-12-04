@@ -1,3 +1,6 @@
 **/target
 **/*.rs.bk
-**/inputs
+**/inputs/*.txt
+**/test.txt
+**/input.py
+**/input.txt
